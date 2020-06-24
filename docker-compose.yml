@@ -1,0 +1,13 @@
+version: '3.7'
+services:
+  pg:
+    container_name: "real_estate_tnx"
+    image: postgres:11
+    ports:
+      - "7432:5432"
+    volumes:
+      - $HOME/docker/volumes/postgres/realestate:/var/lib/postgresql/data
+    environment:
+      - "POSTGRES_USER=realestate"
+      - "POSTGRES_PASSWORD=realestate1234"
+      - "POSTGRES_DB=realestate"
