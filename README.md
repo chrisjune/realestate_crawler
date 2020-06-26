@@ -12,6 +12,9 @@
     - `>>> python3 runner.py`
 7. 완료
 
+![크롤링 시작](https://github.com/chrisjune/realestate_crawler/blob/master/img/screenshot_start.png?raw=true)
+![크롤링 종료](https://github.com/chrisjune/realestate_crawler/blob/master/img/screenshot_end.png?raw=true)
+
 ## FAQ
 * DB가 정상적으로 실행되지 않을 때
   - docker 컨테이너를 삭제 후 다시 생성합니다 `>>> docker-compose down; docker-compose up -d`
