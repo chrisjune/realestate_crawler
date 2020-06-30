@@ -1,4 +1,4 @@
-from runner import InitSetting
+from transaction_crawler import InitSetting
 import requests, json
 from pyproj import Proj, transform
 from urllib.parse import urlencode
