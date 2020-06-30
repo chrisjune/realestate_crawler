@@ -16,7 +16,10 @@
 ![크롤링 종료](https://github.com/chrisjune/realestate_crawler/blob/master/img/screenshot_end.png?raw=true)
 
 ## 실거래가 아파트 위치정보 적재 크롤러 활용방법
-1. 위의 실거래가 적재후 스크립트를 실행
+1. [한국지역정보개발원](https://www.juso.go.kr/addrlink/devAddrLinkRequestWrite.do?returnFn=write&cntcMenu=URL)에서 오픈API신청
+    - API종류: 좌표제공API, API유형: 검색API 선택후 신청
+2. 신청 후 즉시사용이 가능하며, 신청완료후 서비스정보 > 일반인증키를 config의 GEOSECRETKEY에 저장
+3. 스크립트를 실행하여 위치정보 크롤링 시작
     - `>>> python3 location_crawler.py`
 
 ## FAQ
