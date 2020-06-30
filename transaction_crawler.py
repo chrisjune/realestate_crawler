@@ -7,7 +7,7 @@ import config
 import psycopg2
 import requests
 from query import (CREATE_CITY_TABLE, CREATE_SCHEMA, CREATE_TRANSACTION_TABLE,
-                   GRANT_DB_TO_USER, INSERT_CITY_DATA)
+                   GRANT_DB_TO_USER, INSERT_CITY_DATA, CREATE_CITY_TABLE, GENERATE_SERIAL_NO)
 from utils import XmlDictConfig, XmlListConfig
 
 
@@ -66,6 +66,14 @@ class InitSetting:
                     break
                 date_list.append(str(year)+str(month).zfill(2))
         return date_list
+
+    def generate_serial_no(self):
+        """
+        serial_no가 없는 거래내역의 serial_no를 생성해준다
+        """
+        with self.conn.cursor() as cursor:
+            cursor.execute(GENERATE_SERIAL_NO)
+            self.conn.commit()
 
     def runner(self, date_code, city_list):
         """
@@ -145,6 +153,8 @@ if __name__ == '__main__':
             crawler.refresh_connection()
             crawler.runner(date_code, city_list)
             logger.warning((date_code, 'done'))
+
+        crawler.generate_serial_no()
     except AttributeError as e:
         logger.error('CRAWLER STOPPED -%s', e)
     else:

@@ -1,2 +1,5 @@
 __pychache__
 *.pyc
+config_local.py
+.python-version
+.ipynb_checkpoints/

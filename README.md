@@ -1,5 +1,5 @@
 # 국토부 실거래가를 한번에 DB에 적재해주는 크롤러
-## 활용방법
+## 실거래가 적재 크롤러 활용방법
 1. [공공데이터포털](https://data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15057511)에서 API 신청
 2. 신청 후 즉시사용이 가능하며, 신청완료후 서비스정보 > 일반인증키를 config의 SERVICEKEY에 저장
 3. 데이터를 저장할 Postgresql DB 서버를 생성
@@ -9,11 +9,15 @@
 5. DB서버가 잘 실행됐다면, requirements.txt의 모듈을 설치
     - `>>> pip3 install -r requirements.txt`
 6. 모든 준비가 완료되었고 스크립트를 실행
-    - `>>> python3 runner.py`
+    - `>>> python3 transaction_crawler.py`
 7. 완료
 
 ![크롤링 시작](https://github.com/chrisjune/realestate_crawler/blob/master/img/screenshot_start.png?raw=true)
 ![크롤링 종료](https://github.com/chrisjune/realestate_crawler/blob/master/img/screenshot_end.png?raw=true)
+
+## 실거래가 아파트 위치정보 적재 크롤러 활용방법
+1. 위의 실거래가 적재후 스크립트를 실행
+    - `>>> python3 location_crawler.py`
 
 ## FAQ
 * DB가 정상적으로 실행되지 않을 때

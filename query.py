@@ -61,3 +61,28 @@ CREATE_TRANSACTION_TABLE="""create table apartment.transaction(
 	city_code varchar(10) references apartment.city(city_code) null,
 	floor int)
 """
+
+GENERATE_SERIAL_NO="""
+update apartment."transaction"
+set serial_no = region_city_code||'-'||region_city2_code||'-'||road_code
+where serial_no is null;
+"""
+
+SELECT_TRANSACTION_FOR_LOCATION="""
+select serial_no, region_city_code||region_city2_code, region_city_code||road_code, 0,
+road_building_main_code, road_building_sub_code FROM apartment."transaction"
+group  by serial_no, region_city_code, region_city2_code, road_code, road_building_main_code, road_building_sub_code;
+"""
+
+CREATE_LOCATION_TABLE="""
+    CREATE TABLE apartment.location (
+            location_no serial PRIMARY KEY,
+            serial_no varchar(20),
+            longitude_x FLOAT,
+            latitude_y float
+    );
+"""
+
+INSERT_LOCATION = """
+    insert into apartment.location (serial_no, longitude_x, latitude_y) values({}, {}, {});
+    """
