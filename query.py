@@ -77,12 +77,12 @@ group  by serial_no, region_city_code, region_city2_code, road_code, road_buildi
 CREATE_LOCATION_TABLE="""
     CREATE TABLE apartment.location (
             location_no serial PRIMARY KEY,
-            serial_no varchar(20),
+            serial_no varchar(50),
             longitude_x FLOAT,
             latitude_y float
     );
 """
 
 INSERT_LOCATION = """
-    insert into apartment.location (serial_no, longitude_x, latitude_y) values({}, {}, {});
+    insert into apartment.location (serial_no, longitude_x, latitude_y) values('{}', '{}', '{}');
     """

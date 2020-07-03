@@ -1,3 +1,4 @@
+from time import sleep
 from transaction_crawler import InitSetting
 import requests, json
 from pyproj import Proj, transform
@@ -57,6 +58,7 @@ class Location:
 
         result = json.loads(response.text)['results']['juso']
         if not result:
+            print(json.loads(response.text)['results']['common']['errorMessage'], data)
             return None, None
         return result[0]['entX'], result[0]['entY']
 
@@ -83,3 +85,4 @@ if __name__ == '__main__':
         with conn.cursor() as cursor:
             cursor.execute(INSERT_LOCATION.format(serial_no, longtitude, latitude))
             conn.commit()
+        sleep(0.7)
