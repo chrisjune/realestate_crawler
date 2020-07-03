@@ -66,9 +66,14 @@ class Location:
 if __name__ == '__main__':
     init = InitSetting()
     conn = init.conn
-    with conn.cursor() as cursor:
-        cursor.execute(CREATE_LOCATION_TABLE)
-        conn.commit()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute(CREATE_LOCATION_TABLE)
+            conn.commit()
+    except Exception as e:
+        print(e)
+        init.refresh_connection()
+        conn = init.conn
 
     location = Location()
     results = location.apartment_info()
@@ -78,6 +83,7 @@ if __name__ == '__main__':
         longtitude_utm, latitude_utm = location.call_juso_api(result)
         longtitude, latitude = location.to_wsg84(longtitude_utm, latitude_utm)
 
+        sleep(0.7)
         if not longtitude or not latitude:
             continue
 
@@ -85,4 +91,3 @@ if __name__ == '__main__':
         with conn.cursor() as cursor:
             cursor.execute(INSERT_LOCATION.format(serial_no, longtitude, latitude))
             conn.commit()
-        sleep(0.7)

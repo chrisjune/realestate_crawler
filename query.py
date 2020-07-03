@@ -68,11 +68,31 @@ set serial_no = region_city_code||'-'||region_city2_code||'-'||road_code
 where serial_no is null;
 """
 
-SELECT_TRANSACTION_FOR_LOCATION="""
-select serial_no, region_city_code||region_city2_code, region_city_code||road_code, 0,
-road_building_main_code, road_building_sub_code FROM apartment."transaction"
-group  by serial_no, region_city_code, region_city2_code, road_code, road_building_main_code, road_building_sub_code;
+SELECT_TRANSACTION_FOR_LOCATION= """
+SELECT * FROM (
+	SELECT
+		serial_no,
+		region_city_code || region_city2_code,
+		region_city_code || road_code,
+		0,
+		road_building_main_code,
+		road_building_sub_code
+	FROM
+		apartment. "transaction"
+	GROUP BY
+		serial_no,
+		region_city_code,
+		region_city2_code,
+		road_code,
+		road_building_main_code,
+		road_building_sub_code) AS e
+WHERE
+	NOT EXISTS (
+		SELECT 1
+		FROM apartment.location AS l
+		WHERE l.serial_no = e.serial_no);
 """
+
 
 CREATE_LOCATION_TABLE="""
     CREATE TABLE apartment.location (
