@@ -1,4 +1,4 @@
-# 국토부 실거래가를 한번에 DB에 적재해주는 크롤러
+# 국토부 실거래가와 위치를 한번에 DB에 적재해주는 크롤러
 ## 실거래가 적재 크롤러 활용방법
 1. [공공데이터포털](https://data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15057511)에서 API 신청
 2. 신청 후 즉시사용이 가능하며, 신청완료후 서비스정보 > 일반인증키를 config의 SERVICEKEY에 저장
